@@ -1,0 +1,27 @@
+---
+
+- name: Set SELinux exceptions for ClamAV
+  command: "setsebool -P {{ item }} on"
+  with_items:
+  - antivirus_can_scan_system
+
+- name: Configure ClamAV daemon
+  copy:
+    src: scan.conf
+    dest: /etc/clamd.d/scan.conf
+
+- name: Configure ClamAV updater
+  copy:
+    src: freshclam.conf
+    dest: /etc/freshclam.conf
+
+- name: Configure ClamAV updater sysconfig
+  copy:
+    src: freshclam
+    dest: /etc/sysconfig/freshclam
+
+- name: Link ClamAV daemon conf to scan conf
+  file:
+    src: /etc/clamd.d/scan.conf
+    path: /etc/clamd.conf
+    state: link

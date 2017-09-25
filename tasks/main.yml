@@ -1,0 +1,14 @@
+---
+# tasks file for clamav
+
+- include: yum.yml
+  become: true
+  tags: clamav_yum
+
+- include: configure.yml
+  become: true
+  tags: clamav_configure
+
+- include: services.yml
+  become: true
+  tags: clamav_services

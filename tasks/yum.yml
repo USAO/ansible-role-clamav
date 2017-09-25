@@ -1,0 +1,10 @@
+---
+
+- name: Install yum packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - clamav
+  - clamav-scanner-systemd
+  - clamav-update

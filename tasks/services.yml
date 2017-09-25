@@ -1,0 +1,9 @@
+---
+
+- name: Restart ClamAV daemon and run on boot
+  service:
+    name: "{{ item }}"
+    state: restarted
+    enabled: yes
+  with_items:
+  - 'clamd@scan'
